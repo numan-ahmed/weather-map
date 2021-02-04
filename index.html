@@ -29,7 +29,7 @@
             </div>
         </form>
         <div class="weather-status text-white text-center">
-            <img src="https://openweathermap.org/img/wn/02d@2x.png" alt="">
+            <img id="weatherImage" src="https://openweathermap.org/img/wn/02d@2x.png" alt="">
             <h1 id="inputName">Dhaka</h1>
             <h3><span id="inputTemp">38.06</span>&deg;C</h3>
             <h1 id="inputCloud" class="lead">Clouds</h1>
@@ -42,25 +42,24 @@
         const input_name = document.getElementById('inputName');
         const input_temp = document.getElementById('inputTemp');
         const input_cloud = document.getElementById('inputCloud');
+        const weather_Images = document.getElementById('weatherImage');
 
         document.getElementById('inputButton').addEventListener('click', function () {
-            fetch("https://api.openweathermap.org/data/2.5/weather?q='+ input_value.value +'&appid=19eed8a0839e3c70e03fc5a5e46bf1a8")
+            fetch("https://api.openweathermap.org/data/2.5/weather?q="+ input_value.value +"&appid=19eed8a0839e3c70e03fc5a5e46bf1a8")
            
-
                 .then(response => response.json())
                 .then(data => {
                     const nameValue = data.name;
-                    // console.log(data);
-                    const tempValue = data['main']['input_temp'];
-                    const cloudValue = data['weather'][0]['input_cloud'];
+                    console.log(data);
+                    const tempValue = data['main']['temp'];
+                    const cloudValue = data['weather'][0]['main'];
 
                     input_name.innerText = nameValue;
                     input_temp.innerText = tempValue;
-                    input_cloud.innerText = input_cloud;
+                    input_cloud.innerText = cloudValue;
                                   
                 })
                 .catch(err => alert('Wrong city name'))
-
         })
 
          </script>
